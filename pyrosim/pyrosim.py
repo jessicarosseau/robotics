@@ -72,7 +72,7 @@ def Prepare_Link_Dictionary(bodyID):
 
         jointName = jointInfo[1].decode('UTF-8')
 
-        jointName = jointName.decode("utf-8")
+       # jointName = jointName.decode("utf-8")
 
         jointName = jointName.split("_")
 
