@@ -49,6 +49,7 @@ import pyrosim.pyrosim as pyrosim
 import numpy
 import os
 import math
+import constants as a c
 import random
 
 physicsClient = p.connect(p.GUI)
