@@ -246,3 +246,11 @@ def Start_Model(modelName,pos):
     model = MODEL(modelName,pos)
 
     model.Save_Start_Tag(f)
+
+
+def linkNamesToIndices():
+    return None
+
+
+def jointNamesToIndices():
+    return None
