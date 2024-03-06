@@ -66,6 +66,10 @@ class NEURON:
 
         self.value = value
 
+    def Update_Sensor_Neuron(self):
+        sensor_value = pyrosim.Get_Touch_Sensor_Value(self.Get_Link_Name())
+
+
 # -------------------------- Private methods -------------------------
 
     def Determine_Name(self,line):

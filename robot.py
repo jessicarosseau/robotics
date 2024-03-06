@@ -1,56 +1,33 @@
-
+import pybullet as p
+import pyrosim.pyrosim as pyrosim
 from sensor import SENSOR
 from motor import MOTOR
-from pyrosim.neuralNetwork import NEURAL_NETWORK
-
-import pybullet as p
-
-import pybullet as p
-import time
-import pybullet_data
-import pyrosim.pyrosim as pyrosim
-import numpy
-import os
-import math
-import constants as c
-import random
 
 
 class ROBOT:
-
     def __init__(self):
-
         self.robotId = p.loadURDF("body.urdf")
         pyrosim.Prepare_To_Simulate(self.robotId)
         self.Prepare_To_Sense()
         self.Prepare_To_Act()
 
-        self.nn = NEURAL_NETWORK("brain.nndf")
-
     def Prepare_To_Sense(self):
         self.sensors = {}
-
         for linkName in pyrosim.linkNamesToIndices:
             self.sensors[linkName] = SENSOR(linkName)
 
-
-    def Sense(self,t):
+    def Sense(self, i):
         for sensor in self.sensors.values():
-            sensor.Get_Value(t)
-
-
+            sensor.Get_Value(i)
 
     def Prepare_To_Act(self):
         self.motors = {}
 
         for jointName in pyrosim.jointNamesToIndices:
             self.motors[jointName] = MOTOR(jointName)
+            print(jointName)
 
-    def Act(self, t):
+
+    def Act(self, i):
         for motor in self.motors.values():
-            motor.Set_Value(self, t)
-
-
-    def Think(self):
-        self.nn.Update()
-        self.nn.Print()
+            motor.Set_Value(self.robotId, i)
