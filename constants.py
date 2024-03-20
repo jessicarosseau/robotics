@@ -1,23 +1,20 @@
-import math
-import numpy as numpy
+import numpy
+
+pi = numpy.pi
+runs = 1000
 
 
-num_steps = 1000
-# t = numpy.linspace(0, 2 * numpy.pi, num_steps)
-# general I guess
-amplitude = math.pi / 4
-frequency = 10
-phaseOffset = 0
+amplitude = pi/4
+frequency = 6
+offset = 0
 
-# frontLeg
-front_amplitude = math.pi / 4
-front_frequency = 10
-front_phaseOffset = 0
+amplitudeF = pi/4
+frequencyF = 6
+phaseOffsetF = 0
+
+amplitudeB = pi/4
+frequencyB = 6
+phaseOffsetB = pi/4
 
 
-# backLeg
-back_amplitude = math.pi / 4
-back_frequency = 5
-back_phaseOffset = 1
-
-maxForce = 20
+maxforce = 25

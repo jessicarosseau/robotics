@@ -1,20 +1,23 @@
-import numpy as np
-import os
-import matplotlib.pyplot as plt
+import numpy
+import matplotlib.pyplot
 
-back = os.path.join('data', 'backLegSensorValues.npy')
-front = os.path.join('data', 'frontLegSensorValues.npy')
 
-backLegSensorValues = np.load(back)
-frontLegSensorValues = np.load(front)
+frontLegSensorValues = numpy.load("data/frontLegSensorValues.npy")
+backLegSensorValues = numpy.load("data/backLegSensorValues.npy")
+arrayDataF = numpy.load("data/arrayDataF.npy")
+arrayDataB = numpy.load("data/arrayDataB.npy")
 
-# Plotting with labels
-plt.plot(backLegSensorValues, label='Back Leg', linewidth=2.5)
-plt.plot(frontLegSensorValues, label='Front Leg')
 
-# Adding a legend with the specified labels
-plt.legend()
 
-# Display the plot
-plt.show()
 
+matplotlib.pyplot.plot(frontLegSensorValues, linewidth=3.5, label = "front leg")
+matplotlib.pyplot.plot(backLegSensorValues, linewidth=1, label = "back leg")
+matplotlib.pyplot.legend()
+matplotlib.pyplot.show()
+
+
+
+matplotlib.pyplot.plot(arrayDataF, linewidth=3.5, label = "forward")
+matplotlib.pyplot.plot(arrayDataB, linewidth=1, label = "backward")
+matplotlib.pyplot.legend()
+matplotlib.pyplot.show()

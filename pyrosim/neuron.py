@@ -6,7 +6,7 @@ import pyrosim.pyrosim as pyrosim
 
 import pyrosim.constants as c
 
-class NEURON: 
+class NEURON:
 
     def __init__(self,line):
 
@@ -62,15 +62,35 @@ class NEURON:
 
         # print("")
 
-    def Set_Value(self,value):
-
-        self.value = value
 
     def Update_Sensor_Neuron(self):
         self.Set_Value(pyrosim.Get_Touch_Sensor_Value_For_Link(self.Get_Link_Name()))
 
-    def Update_Hidden_Or_Motor_Neuron(self):
-        self.Set_Value(math.pi/4.0)
+
+
+    def Update_Hidden_Or_Motor_Neuron(self, neurons, synapses):
+        self.Set_Value(0)
+        # print("before loop: "+ str(self.Get_Value()))
+        for key in synapses.keys():
+            if key[1] == self.Get_Name():
+                current_synapse_weight = synapses[key].Get_Weight()
+                pre_synaptic_neuron_value = neurons[key[0]].Get_Value()
+
+                self.Allow_Presynaptic_Neuron_To_Influence_Me(current_synapse_weight, pre_synaptic_neuron_value)
+        self.Threshold()
+        # print("after loop: "+ str(self.Get_Value()))
+
+
+    def Allow_Presynaptic_Neuron_To_Influence_Me(self, weight, value):
+        result = weight * value
+        self.Add_To_Value(result)
+
+
+
+    def Set_Value(self,value):
+
+        self.value = value
+
 # -------------------------- Private methods -------------------------
 
     def Determine_Name(self,line):

@@ -1,31 +1,31 @@
 from world import WORLD
 from robot import ROBOT
+from sensor import SENSOR
+from motor import MOTOR
+
 import pybullet as p
 import pybullet_data
-import constants as c
+import pyrosim.pyrosim as pyrosim
 import time
-
+import constants as c
 
 class SIMULATION:
+
     def __init__(self):
         self.physicsClient = p.connect(p.GUI)
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.configureDebugVisualizer(p.COV_ENABLE_GUI, 0)
-        p.setGravity(0, 0, -9.8)
-
+        p.setGravity(0,0,-9.8)
         self.world = WORLD()
         self.robot = ROBOT()
 
     def Run(self):
-
-        for i in range(c.num_steps):
-            #print(i)
+        for t in range(c.runs):
+            time.sleep(1/8000)
             p.stepSimulation()
-            self.robot.Sense(i)
-            # self.robot.Prepare_To_Act()
+            self.robot.Sense(t)
             self.robot.Think()
-            self.robot.Act(i)
-            time.sleep(1/60)
+            self.robot.Act(t)
+
 
     def __del__(self):
         p.disconnect()
