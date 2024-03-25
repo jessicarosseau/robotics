@@ -3,6 +3,12 @@ import random
 import pyrosim.pyrosim as pyrosim
 
 
+# to tell pyrosim the name of the file where information about the
+# world you're about to create should be stored.
+# This world will currently be called box, because it will only
+# contain a box (links can be spheres, cylinders, or boxes).
+
+
 def Create_World():
     pyrosim.Start_SDF("world.sdf")
     pyrosim.Send_Cube(name="Box", pos=[-4, 4, 0.5], size=[1, 1, 1])
@@ -28,16 +34,15 @@ def Generate_Brain():
     pyrosim.Send_Motor_Neuron(name=3, jointName="Torso_BackLeg")
     pyrosim.Send_Motor_Neuron(name=4, jointName="Torso_FrontLeg")
 
-    pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=-1.0)
-    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=-0.7)
-
-    pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=4, weight=-1.0)
-    pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=-0.7)
-
     for i in range(3):
-        for j in range(3,5):
-            w = random.uniform(-1,1)
-            pyrosim.Send_Synapse(i,j,1)
+        for j in range(3, 5):
+            pyrosim.Send_Synapse(sourceNeuronName=i, targetNeuronName=j, weight=2 * random.random() - 1)
+
+    # pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=3, weight=-1.0)
+    # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=3, weight=-0.7)
+    #
+    # pyrosim.Send_Synapse(sourceNeuronName=0, targetNeuronName=4, weight=-1.0)
+    # pyrosim.Send_Synapse(sourceNeuronName=1, targetNeuronName=4, weight=-0.7)
 
     pyrosim.End()
 
@@ -45,6 +50,3 @@ def Generate_Brain():
 Create_World()
 Generate_Body()
 Generate_Brain()
-
-
-

@@ -9,12 +9,20 @@ import pyrosim.pyrosim as pyrosim
 import time
 import constants as c
 
+
 class SIMULATION:
 
-    def __init__(self):
-        self.physicsClient = p.connect(p.GUI)
+    def __init__(self, direction):
+
+        if direction == "DIRECT":
+            self.physicsClient = p.connect(p.DIRECT)
+        elif direction == "GUI":
+            self.physicsClient = p.connect(p.GUI)
+        else:
+            print("Invalid direction")
+
         p.setAdditionalSearchPath(pybullet_data.getDataPath())
-        p.setGravity(0,0,-9.8)
+        p.setGravity(0, 0, -9.8)
         self.world = WORLD()
         self.robot = ROBOT()
 
@@ -26,6 +34,8 @@ class SIMULATION:
             self.robot.Think()
             self.robot.Act(t)
 
+    def Get_Fitness(self):
+        self.robot.Get_Fitness()
 
     def __del__(self):
         p.disconnect()
