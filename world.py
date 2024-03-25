@@ -10,4 +10,3 @@ class WORLD:
         self.planeId = p.loadURDF("plane.urdf")
         pass
 
-

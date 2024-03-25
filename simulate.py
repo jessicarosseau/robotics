@@ -8,7 +8,9 @@ if len(sys.argv) > 1:
 else:
     directOrGUI = 'GUI'
 
-simulation = SIMULATION(directOrGUI)
+SolutionID = sys.argv[2]
+
+simulation = SIMULATION(directOrGUI, SolutionID)
 simulation.Run()
 simulation.Get_Fitness()
 
