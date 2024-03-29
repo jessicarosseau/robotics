@@ -1,4 +1,5 @@
 import pyrosim.pyrosim as pyrosim
+import constants as c
 import numpy
 import random
 import os
@@ -8,7 +9,7 @@ import time
 class SOLUTION:
     def __init__(self, nextAvailableID):
         self.myID = nextAvailableID
-        self.weights = numpy.random.rand(3, 2)
+        self.weights = numpy.random.rand(c.numSensorNeurons, c.numMotorNuerons)
         self.weights = self.weights * 2 - 1
         self.fitness = 0
 
