@@ -4,6 +4,9 @@ import pyrosim.pyrosim as pyrosim
 import time
 import constants as c
 import numpy
+import math  # Import math library to use mathematical functions
+
+
 class SENSOR:
 
     def __init__(self, linkName):
@@ -11,4 +14,17 @@ class SENSOR:
         self.values = numpy.zeros(c.runs)
 
     def Get_Value(self, t):
-        self.values[t] = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+        # Original touch sensor value
+        original_value = pyrosim.Get_Touch_Sensor_Value_For_Link(self.linkName)
+
+        # Overwrite the sensor's value with a sinusoidal signal
+        # x is the frequency of the sinusoidal signal, adjust as needed
+        x = 1  # You can start with x = 1 for testing purposes
+        sinusoidal_value = math.sin(x * t)
+
+        # Update the sensor's value to the sinusoidal value
+        self.values[t] = sinusoidal_value
+
+        # Optionally, you can blend the original sensor value with the sinusoidal signal
+        # This could be useful if you want to maintain some touch sensor functionality
+        # Example: self.values[t] = original_value * sinusoidal_value
