@@ -53,7 +53,6 @@ class PARALLEL_HILL_CLIMBER:
         for currentGeneration in range(c.numberOfGenerations):
             self.Evolve_For_One_Generation()
 
-        self.Show_Best()
 
     def Spawn(self):
         self.children = {}
