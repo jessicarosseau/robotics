@@ -11,7 +11,9 @@ import constants as c
 
 class SIMULATION:
 
-    def __init__(self, direction, solutionID):
+    def __init__(self, direction, solutionID,frequency, duration):
+        self.frequency = frequency
+        self.duration = duration
         self.directOrGUI = direction
         if direction == "DIRECT":
             self.physicsClient = p.connect(p.DIRECT)
@@ -26,13 +28,15 @@ class SIMULATION:
         self.robot = ROBOT(solutionID)
 
     def Run(self):
-        for t in range(c.runs):
-            if self.directOrGUI == "GUI":
-                time.sleep(1/8000)
+        #c.runs
+        for t in range(self.duration):
+            # if self.directOrGUI == "GUI":
+            #     time.sleep(1/240)
             p.stepSimulation()
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.Act(t)
+        input("Press Enter to exit...")
 
 
     def __del__(self):

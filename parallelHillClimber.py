@@ -8,8 +8,14 @@ import os
 class PARALLEL_HILL_CLIMBER:
     def __init__(self):
 
-        os.system("rm brain*.nndf")
-        os.system("rm fitness*.nndf")
+        # os.system("rm brain*.nndf")
+        # os.system("rm fitness*.nndf")
+
+        if os.path.exists("brain*.nndf"):
+            os.remove("brain*.nndf")
+
+        if os.path.exists("fitness*.nndf"):
+            os.remove("fitness*.nndf")
 
         self.parents = {}
 

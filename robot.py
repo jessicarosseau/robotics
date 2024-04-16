@@ -17,8 +17,31 @@ class ROBOT:
         ROBOT.Prepare_To_Sense(self)
         ROBOT.Prepare_To_Act(self)
         self.ID = SolutionID
-        self.nn = NEURAL_NETWORK("brain" + str(SolutionID) + ".nndf")
-        os.system("rm brain" + str(SolutionID) + ".nndf")
+
+        filename = "brain" + str(SolutionID) + ".nndf"
+        filepath = os.path.join("/Users/jessica/Desktop/robotics2", filename)
+
+        try:
+            self.nn = NEURAL_NETWORK(filepath)
+        except FileNotFoundError:
+            print(f"File not found: {filepath}")
+            raise
+        except Exception as e:
+            print(f"An error occurred while loading the neural network from {filepath}: {e}")
+            raise
+
+        # Optionally remove the file if it's no longer needed
+        try:
+            os.remove(filepath)
+            print(f"Successfully removed {filepath}")
+        except Exception as e:
+            print(f"Failed to remove {filepath}: {e}")
+
+        #self.nn = NEURAL_NETWORK("brain" + str(SolutionID) + ".nndf")
+        # filename = "brain" + str(SolutionID) + ".nndf"
+        # filepath = os.path.join("/Users/jessica/Desktop/robotics2", filename)
+        # self.nn = NEURAL_NETWORK(filepath)
+        # os.system("rm brain" + str(SolutionID) + ".nndf")
 
 
     def Prepare_To_Sense(self):
