@@ -11,8 +11,8 @@ class PARALLEL_HILL_CLIMBER:
         # os.system("rm brain*.nndf")
         # os.system("rm fitness*.nndf")
 
-        if os.path.exists("brain*.nndf"):
-            os.remove("brain*.nndf")
+        # if os.path.exists("brain*.nndf"):
+        #     os.remove("brain*.nndf")
 
         if os.path.exists("fitness*.nndf"):
             os.remove("fitness*.nndf")
@@ -84,3 +84,4 @@ class PARALLEL_HILL_CLIMBER:
 
         for key in solutions.keys():
             solutions[key].Wait_For_Simulation_To_End()
+
