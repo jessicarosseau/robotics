@@ -36,7 +36,7 @@ class SIMULATION:
             self.robot.Sense(t)
             self.robot.Think()
             self.robot.Act(t)
-        input("Press Enter to exit...")
+        #input("Press Enter to exit...")
 
 
     def __del__(self):
